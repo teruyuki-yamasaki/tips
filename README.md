@@ -1,5 +1,49 @@
 # tips
 
+## PNG to JPG
+```
+from google.colab import drive 
+drive.mount('/content/drive/')
+%cd /content/drive/MyDrive/path/to/current
+
+from PIL import Image
+import matplotlib.pyplot as plt 
+import cv2 
+import numpy as np 
+from skimage.transform import resize 
+
+def imdown(im, f=2):
+    im = resize(im1, (im.shape[0] // f, im.shape[1] // f), anti_aliasing=True)
+    return (im*255).astype(np.uint8)
+
+def npprint(nparray, name='nparray'):
+    print()
+    print(f'{name} = ', nparray.shape, nparray.dtype) 
+
+def imshow(im, name='nparray'):
+    npprint(im, name) 
+    plt.imshow(im) 
+    plt.show()
+
+
+path_to_png = 'data/FaceFeb2022.png' 
+path_to_jpg = 'data/FaceFeb2022.jpg' 
+
+im1 = Image.open(path_to_png) 
+im1 = np.asarray(im1)
+imshow(im1, 'rgba') 
+
+im1 = cv2.cvtColor(im1, cv2.COLOR_RGBA2RGB)
+imshow(im1, 'rgb')
+
+if 1:
+    im1 = imdown(im1, f=2) 
+    imshow(im1, 'downsampled') 
+
+im1 = Image.fromarray(im1) 
+im1.save(path_to_jpg)
+```
+
 
 Xのaxis=-2の配列をそれぞれaxis=-1の最小値の配列に置き換える
 ```
