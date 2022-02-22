@@ -45,6 +45,7 @@ im1.save(path_to_jpg)
 ```
 
 
+## Numpy manipulation
 Xのaxis=-2の配列をそれぞれaxis=-1の最小値の配列に置き換える
 ```
 Xmin = np.min(X, axis=-1, keepdims=True) * np.ones_like(X)
